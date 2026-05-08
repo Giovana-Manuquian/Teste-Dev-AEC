@@ -66,7 +66,6 @@ namespace TesteDevAEC.Controllers
             var enderecos = _context.Enderecos.Where(e => e.UsuarioId == usuarioId).ToList();
 
             var builder = new StringBuilder();
-            // Cabeçalho do CSV
             builder.AppendLine("CEP;Logradouro;Complemento;Bairro;Cidade;UF;Numero");
 
             foreach (var end in enderecos)
@@ -74,7 +73,6 @@ namespace TesteDevAEC.Controllers
                 builder.AppendLine($"{end.Cep};{end.Logradouro};{end.Complemento};{end.Bairro};{end.Cidade};{end.Uf};{end.Numero}");
             }
 
-            // O uso do ';' (ponto e vírgula) é melhor para o Excel em português abrir direto sem bugar
             return File(Encoding.UTF8.GetBytes(builder.ToString()), "text/csv", "meus_enderecos.csv");
         }
 
