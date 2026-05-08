@@ -22,7 +22,7 @@ Os scripts de criação das tabelas `Usuarios` e `Enderecos` estão localizados 
 ## ⚙️ Como Executar o Projeto
 1. Clone este repositório:
    ```bash
-   git clone [https://github.com/Giovana-Manuquian/Teste-Dev-AEC](https://github.com/Giovana-Manuquian/Teste-Dev-AEC)
+   git clone https://github.com/Giovana-Manuquian/Teste-Dev-AEC
 2. Execute o script SQL no seu SQL Server para criar a estrutura das tabelas.
 
 3. Abra a solução no Visual Studio 2022.

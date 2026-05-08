@@ -2,7 +2,7 @@
 using TesteDevAEC.Data;
 using TesteDevAEC.Models;
 using System.Linq;
-using Microsoft.AspNetCore.Http; // Necessário para Session
+using Microsoft.AspNetCore.Http;
 
 namespace TesteDevAEC.Controllers
 {

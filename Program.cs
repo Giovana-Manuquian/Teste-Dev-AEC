@@ -3,10 +3,10 @@ using TesteDevAEC.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuração da conexão com o MySQL
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+// Troque o builder do MySQL por este:
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // --- ADICIONADO: Configuração de Sessão ---
 builder.Services.AddDistributedMemoryCache();

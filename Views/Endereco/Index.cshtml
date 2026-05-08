@@ -40,6 +40,7 @@
                         <td>@item.Cidade/@item.Uf</td>
                         <td>@item.Numero</td>
                         <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Editar</a>
                             <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm" onclick="return confirm('Deseja excluir?')">Excluir</a>
                         </td>
                     </tr>

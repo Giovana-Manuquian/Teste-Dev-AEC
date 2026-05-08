@@ -1,7 +1,7 @@
 CREATE TABLE Usuarios (
     Id INT PRIMARY KEY IDENTITY(1,1),
     Nome VARCHAR(100) NOT NULL,
-    Usuario VARCHAR(50) NOT NULL UNIQUE,
+    UsuarioLogin VARCHAR(50) NOT NULL UNIQUE,
     Senha VARCHAR(255) NOT NULL
 );
 
@@ -17,3 +17,6 @@ CREATE TABLE Enderecos (
     UsuarioId INT NOT NULL,
     FOREIGN KEY (UsuarioId) REFERENCES Usuarios(Id)
 );
+
+INSERT INTO Usuarios (Nome, UsuarioLogin, Senha) 
+VALUES ('Giovana Dev', 'giovana', '123456');
