@@ -2,6 +2,7 @@
 using TesteDevAEC.Data;
 using TesteDevAEC.Models;
 using System.Linq;
+using Microsoft.AspNetCore.Http; // Necessário para Session
 
 namespace TesteDevAEC.Controllers
 {
@@ -14,27 +15,24 @@ namespace TesteDevAEC.Controllers
             _context = context;
         }
 
-        // GET: Login
         public IActionResult Index()
         {
             return View();
         }
 
-        // POST: Login/Autenticar
         [HttpPost]
         public IActionResult Autenticar(string login, string senha)
         {
-            // Busca o usuário no MySQL
             var user = _context.Usuarios
                 .FirstOrDefault(u => u.UsuarioLogin == login && u.Senha == senha);
 
             if (user != null)
             {
-                // Se achou, vai para a tela de endereços (que vamos criar)
+                // Guarda o ID do usuário na sessão de forma limpa
+                HttpContext.Session.SetInt32("UsuarioLogadoId", user.Id);
                 return RedirectToAction("Index", "Endereco");
             }
 
-            // Se não achou, manda mensagem de erro
             ViewBag.Erro = "Usuário ou senha inválidos!";
             return View("Index");
         }

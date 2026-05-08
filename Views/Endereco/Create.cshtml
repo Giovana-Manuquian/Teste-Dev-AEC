@@ -1,0 +1,104 @@
+﻿@model TesteDevAEC.Models.Endereco
+
+<div class="container mt-4">
+    <div class="card shadow p-4">
+        <h2>Cadastrar Endereço</h2>
+        <hr />
+        <form asp-action="Create" method="post">
+            
+            <div asp-validation-summary="ModelOnly" class="text-danger fw-bold mb-3"></div>
+
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label class="form-label fw-bold">CEP <span class="text-danger">*</span></label>
+                    <input asp-for="Cep" id="txtCep" class="form-control" placeholder="00000000" maxlength="9" required />
+                    <span asp-validation-for="Cep" class="text-danger small"></span>
+                </div>
+                <div class="col-md-8 mb-3">
+                    <label class="form-label fw-bold">Logradouro <span class="text-danger">*</span></label>
+                    <input asp-for="Logradouro" id="txtLogradouro" class="form-control" required />
+                    <span asp-validation-for="Logradouro" class="text-danger small"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-5 mb-3">
+                    <label class="form-label fw-bold">Bairro <span class="text-danger">*</span></label>
+                    <input asp-for="Bairro" id="txtBairro" class="form-control" required />
+                    <span asp-validation-for="Bairro" class="text-danger small"></span>
+                </div>
+                <div class="col-md-5 mb-3">
+                    <label class="form-label fw-bold">Cidade <span class="text-danger">*</span></label>
+                    <input asp-for="Cidade" id="txtCidade" class="form-control" required />
+                    <span asp-validation-for="Cidade" class="text-danger small"></span>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <label class="form-label fw-bold">UF <span class="text-danger">*</span></label>
+                    <input asp-for="Uf" id="txtUf" class="form-control" maxlength="2" required />
+                    <span asp-validation-for="Uf" class="text-danger small"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label class="form-label fw-bold">Número <span class="text-danger">*</span></label>
+                    <input asp-for="Numero" class="form-control" maxlength="10" required />
+                    <span asp-validation-for="Numero" class="text-danger small"></span>
+                </div>
+                <div class="col-md-8 mb-3">
+                    <label class="form-label fw-bold">Complemento <span class="text-danger">*</span></label>
+                    <input asp-for="Complemento" class="form-control" />
+                    <span asp-validation-for="Complemento" class="text-danger small"></span>
+                </div>
+            </div>
+
+            <div class="mt-3">
+                <button type="submit" class="btn btn-success">Salvar Endereço</button>
+                <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        document.getElementById('txtCep').addEventListener('input', function() {
+            var cep = this.value.replace(/\D/g, '');
+            
+            if (cep.length === 8) {
+                document.getElementById('txtLogradouro').value = "Buscando...";
+                document.getElementById('txtBairro').value = "Buscando...";
+                document.getElementById('txtCidade').value = "Buscando...";
+                document.getElementById('txtUf').value = "..";
+
+                fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data.erro) {
+                            document.getElementById('txtLogradouro').value = data.logradouro;
+                            document.getElementById('txtBairro').value = data.bairro;
+                            document.getElementById('txtCidade').value = data.localidade;
+                            document.getElementById('txtUf').value = data.uf;
+                        } else {
+                            alert("CEP não encontrado.");
+                            limparCampos();
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro:', error);
+                        limparCampos();
+                    });
+            }
+        });
+
+        function limparCampos() {
+            document.getElementById('txtLogradouro').value = "";
+            document.getElementById('txtBairro').value = "";
+            document.getElementById('txtCidade').value = "";
+            document.getElementById('txtUf').value = "";
+        }
+    </script>
+}
