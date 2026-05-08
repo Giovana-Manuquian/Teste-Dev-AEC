@@ -1,0 +1,20 @@
+﻿## Build results
+[Bb]in/
+[Oo]bj/
+
+## VS user-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Rider / VSCode
+.idea/
+.vscode/
+
+## OS
+.DS_Store
+Thumbs.db
+
+## Logs
+*.log
