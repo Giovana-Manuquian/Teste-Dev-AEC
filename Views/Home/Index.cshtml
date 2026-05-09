@@ -1,8 +1,34 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Início";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="aec-hero">
+    <div class="row align-items-center g-4 py-md-3">
+        <div class="col-lg-7">
+            <p class="aec-eyebrow text-uppercase small fw-semibold text-secondary mb-2">Teste prático · Desenvolvedor C#</p>
+            <h1 class="display-6 mb-3">Gestão de endereços com login, ViaCEP e exportação CSV</h1>
+            <p class="lead text-secondary mb-4">
+                Aplicação ASP.NET Core MVC com Entity Framework e SQL Server. Autenticação de usuário, CRUD completo de endereços, integração com a API ViaCEP e exportação dos seus dados em planilha.
+            </p>
+            <div class="d-flex flex-wrap gap-2">
+                <a class="btn btn-aec-primary btn-lg" asp-controller="Login" asp-action="Index">
+                    <i class="bi bi-box-arrow-in-right me-2"></i>Acessar o sistema
+                </a>
+                <a class="btn btn-aec-outline btn-lg" asp-controller="Home" asp-action="Privacy">
+                    Privacidade
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="aec-card p-4 p-lg-5">
+                <h2 class="h6 fw-bold text-secondary text-uppercase mb-3">Escopo do teste</h2>
+                <ul class="list-unstyled mb-0 small lh-lg">
+                    <li class="d-flex gap-2 mb-2"><i class="bi bi-check-circle-fill text-success flex-shrink-0"></i> Login com validação de credenciais</li>
+                    <li class="d-flex gap-2 mb-2"><i class="bi bi-check-circle-fill text-success flex-shrink-0"></i> CRUD de endereços (CEP, logradouro, complemento, bairro, cidade, UF, número)</li>
+                    <li class="d-flex gap-2 mb-2"><i class="bi bi-check-circle-fill text-success flex-shrink-0"></i> Busca automática por CEP (ViaCEP)</li>
+                    <li class="d-flex gap-2"><i class="bi bi-check-circle-fill text-success flex-shrink-0"></i> Exportação dos endereços para CSV</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>

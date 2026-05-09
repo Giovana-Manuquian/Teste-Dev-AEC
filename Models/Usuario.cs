@@ -11,14 +11,16 @@ namespace TesteDevAEC.Models
 
         [Required]
         [StringLength(100)]
-        public string Nome { get; set; }
+        public string Nome { get; set; } = string.Empty;
 
         [Required]
         [StringLength(50)]
-        public string UsuarioLogin { get; set; } // Nome alterado para não conflitar com a classe
+        public string UsuarioLogin { get; set; } = string.Empty;
 
         [Required]
-        [StringLength(255)]
-        public string Senha { get; set; }
+        public byte[] SenhaSalt { get; set; } = Array.Empty<byte>();
+
+        [Required]
+        public byte[] SenhaHash { get; set; } = Array.Empty<byte>();
     }
 }

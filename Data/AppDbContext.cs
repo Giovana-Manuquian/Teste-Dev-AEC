@@ -6,7 +6,8 @@ namespace TesteDevAEC.Data
     public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-        public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<Endereco> Enderecos { get; set; }
+
+        public DbSet<Usuario> Usuarios => Set<Usuario>();
+        public DbSet<Endereco> Enderecos => Set<Endereco>();
     }
 }

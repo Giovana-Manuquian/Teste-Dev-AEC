@@ -1,6 +1,20 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Privacidade";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<div class="py-4">
+    <h1 class="h3 aec-page-title">Privacidade</h1>
+    <p class="aec-page-lead">Esta página descreve o uso mínimo de dados no contexto do teste técnico.</p>
+
+    <div class="aec-card p-4 mt-4">
+        <p class="mb-3">
+            O sistema armazena apenas os dados necessários para o exercício: credenciais de acesso (senha tratada com hash) e endereços vinculados ao usuário logado.
+        </p>
+        <p class="mb-3">
+            A consulta de CEP utiliza o serviço público <a href="https://viacep.com.br/" target="_blank" rel="noopener noreferrer">ViaCEP</a>; nenhum dado pessoal é enviado além do CEP digitado.
+        </p>
+        <p class="mb-0 text-secondary small">
+            Em ambiente de desenvolvimento, utilize apenas dados fictícios ou públicos de exemplo.
+        </p>
+    </div>
+</div>

@@ -1,29 +1,40 @@
 ﻿@{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Entrar";
 }
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-4 card p-4 shadow">
-            <h2 class="text-center">Acessar Sistema</h2>
-            <hr />
-            
-            @if (ViewBag.Erro != null)
-            {
-                <div class="alert alert-danger">@ViewBag.Erro</div>
-            }
-
-            <form asp-action="Autenticar" asp-controller="Login" method="post">
-                <div class="form-group mb-3">
-                    <label>Usuário</label>
-                    <input type="text" name="login" class="form-control" placeholder="Digite seu usuário" required />
-                </div>
-                <div class="form-group mb-3">
-                    <label>Senha</label>
-                    <input type="password" name="senha" class="form-control" placeholder="Digite sua senha" required />
-                </div>
-                <button type="submit" class="btn btn-primary w-100">Entrar</button>
-            </form>
+<div class="py-5 aec-auth-wrap">
+    <div class="aec-card p-4 p-md-5">
+        <div class="text-center mb-4">
+            <div class="aec-auth-icon mx-auto">
+                <i class="bi bi-shield-lock" aria-hidden="true"></i>
+            </div>
+            <h1 class="h4 fw-bold mb-1">Acesso ao sistema</h1>
+            <p class="text-secondary small mb-0">Entre com usuário e senha para gerenciar seus endereços.</p>
         </div>
+
+        @if (ViewBag.Erro != null)
+        {
+            <div class="alert alert-danger d-flex align-items-start gap-2 border-0 small" role="alert">
+                <i class="bi bi-exclamation-triangle-fill flex-shrink-0 mt-1"></i>
+                <span>@ViewBag.Erro</span>
+            </div>
+        }
+
+        <form asp-action="Autenticar" asp-controller="Login" method="post" class="mt-3">
+            <div class="mb-3">
+                <label class="form-label" for="login">Usuário</label>
+                <input type="text" id="login" name="login" class="form-control" placeholder="Seu login" autocomplete="username" required />
+            </div>
+            <div class="mb-4">
+                <label class="form-label" for="senha">Senha</label>
+                <input type="password" id="senha" name="senha" class="form-control" placeholder="••••••••" autocomplete="current-password" required />
+            </div>
+            <button type="submit" class="btn btn-aec-primary w-100 py-2">
+                <i class="bi bi-box-arrow-in-right me-1"></i>Entrar
+            </button>
+        </form>
     </div>
+    <p class="text-center text-secondary small mt-3 mb-0">
+        Dúvidas sobre o teste? Consulte o <span class="text-nowrap">README</span> do repositório.
+    </p>
 </div>

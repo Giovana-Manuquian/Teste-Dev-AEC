@@ -4,11 +4,10 @@ using TesteDevAEC.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-// Troque o builder do MySQL por este:
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// --- ADICIONADO: Configuração de Sessão ---
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(connectionString));
+
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
@@ -16,8 +15,8 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
-// ------------------------------------------
 
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -33,14 +32,12 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-// --- ADICIONADO: Ativar a Sessão ---
 app.UseSession();
-// -----------------------------------
 
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Login}/{action=Index}/{id?}"); // Mudei para começar no Login
+    pattern: "{controller=Login}/{action=Index}/{id?}");
 
 app.Run();

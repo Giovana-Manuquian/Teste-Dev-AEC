@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TesteDevAEC.Data;
-using TesteDevAEC.Models;
-using System.Linq;
-using Microsoft.AspNetCore.Http;
+using TesteDevAEC.Security;
 
 namespace TesteDevAEC.Controllers
 {
@@ -23,18 +22,24 @@ namespace TesteDevAEC.Controllers
         [HttpPost]
         public IActionResult Autenticar(string login, string senha)
         {
-            var user = _context.Usuarios
-                .FirstOrDefault(u => u.UsuarioLogin == login && u.Senha == senha);
+            var user = _context.Usuarios.AsNoTracking()
+                .FirstOrDefault(u => u.UsuarioLogin == login);
 
-            if (user != null)
+            if (user != null && PasswordHasher.Verify(senha, user.SenhaSalt, user.SenhaHash))
             {
-                // Guarda o ID do usuário na sessão de forma limpa
                 HttpContext.Session.SetInt32("UsuarioLogadoId", user.Id);
                 return RedirectToAction("Index", "Endereco");
             }
 
             ViewBag.Erro = "Usuário ou senha inválidos!";
             return View("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

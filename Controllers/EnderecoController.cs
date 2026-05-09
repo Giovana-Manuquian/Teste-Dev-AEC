@@ -70,7 +70,7 @@ namespace TesteDevAEC.Controllers
 
             foreach (var end in enderecos)
             {
-                builder.AppendLine($"{end.Cep};{end.Logradouro};{end.Complemento};{end.Bairro};{end.Cidade};{end.Uf};{end.Numero}");
+                builder.AppendLine($"{end.Cep};{end.Logradouro};{end.Complemento ?? ""};{end.Bairro};{end.Cidade};{end.Uf};{end.Numero}");
             }
 
             return File(Encoding.UTF8.GetBytes(builder.ToString()), "text/csv", "meus_enderecos.csv");
@@ -104,16 +104,20 @@ namespace TesteDevAEC.Controllers
             return View(endereco);
         }
 
-        // GET: Endereco/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
             int? usuarioId = HttpContext.Session.GetInt32("UsuarioLogadoId");
+            if (usuarioId == null) return RedirectToAction("Index", "Login");
+
             var endereco = _context.Enderecos.FirstOrDefault(e => e.Id == id && e.UsuarioId == usuarioId);
             if (endereco != null)
             {
                 _context.Enderecos.Remove(endereco);
                 _context.SaveChanges();
             }
+
             return RedirectToAction(nameof(Index));
         }
     }
